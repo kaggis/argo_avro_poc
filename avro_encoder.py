@@ -2,6 +2,10 @@
 
 from argparse import ArgumentParser
 import argparse, os
+import avro.schema
+
+
+### ARGUMENT PARSING
 
 def file_valid(x):
 	if not os.path.exists(x):
@@ -11,15 +15,10 @@ def file_valid(x):
 
 def dir_valid(x): 
 	d = os.path.dirname(x)
-	
-	 
-	
 	if d!= "" and not os.path.exists(d):
 		raise argparse.ArgumentTypeError("{0} not on valid directory!".format(x))
 	
 	return x
-
-	
 
 
 arg_parser = ArgumentParser(description="Encoding of raw argo files in avro format")
@@ -28,4 +27,11 @@ arg_parser.add_argument("-o","--output",help="output avro file ", dest="file_out
 arg_parser.add_argument("-s","--schema",help="avro schema file", dest="file_schema", metavar="FILE", required="TRUE", type=file_valid)
 args = arg_parser.parse_args()
 
-print args
+### READ AVRO SCHEMA TEST 
+schema = avro.schema.parse(open(args.file_schema).read())
+
+for field in schema.fields:
+	print "name:" + field.name
+	print "type:" + field.type.type
+	print "------------------------"
+	 
