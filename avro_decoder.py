@@ -6,8 +6,8 @@ import argparse, os
 
 # avro related imports 
 import avro.schema
-from avro.datafile import DataFileReader, DataFileWriter
-from avro.io import DatumReader, DatumWriter
+from avro.datafile import DataFileReader
+from avro.io import DatumReader
 
 
 ### ARGUMENT PARSING
@@ -21,3 +21,11 @@ arg_parser = ArgumentParser(description="Decoding of argo avro-binary files")
 arg_parser.add_argument("-i","--input",help="avro binary file", dest="file_in", metavar="FILE", required="TRUE", type=file_valid)
 
 args = arg_parser.parse_args()
+
+
+### EXTRACT SCHEMA FROM FILE
+
+reader = DataFileReader(open(args.file_in, "r"), DatumReader())
+schema = reader.datum_reader.writers_schema
+
+print schema
