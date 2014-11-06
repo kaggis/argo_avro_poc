@@ -27,11 +27,26 @@ arg_parser.add_argument("-o","--output",help="output avro file ", dest="file_out
 arg_parser.add_argument("-s","--schema",help="avro schema file", dest="file_schema", metavar="FILE", required="TRUE", type=file_valid)
 args = arg_parser.parse_args()
 
-### READ AVRO SCHEMA TEST 
+### READ SCHEMA 
 schema = avro.schema.parse(open(args.file_schema).read())
 
-for field in schema.fields:
-	print "name:" + field.name
-	print "type:" + field.type.type
-	print "------------------------"
-	 
+### READ RAW FILE AND CREATE DIC ACCORDING TO SCHEMA
+
+records = [] # store the collection of row data
+ 
+with open(args.file_in) as f:
+	for line in f:
+		tokens = line.split('\001') # Split each row into fields
+		# Check if number of fields in line == number of fields in schema
+		if len(tokens) != len(schema.fields):
+			print "Mismatch of number of fields between raw file and schema!" 
+			exit(1)
+
+		post = {} # dictionary : fields + row data
+		for i,val in enumerate(tokens):
+			post[schema.fields[i].name]=val
+
+		records.append(post)	
+
+print records
+
