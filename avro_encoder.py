@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 
+# arg parsing related imports
 from argparse import ArgumentParser
 import argparse, os
+
+# avro related imports 
 import avro.schema
+from avro.datafile import DataFileReader, DataFileWriter
+from avro.io import DatumReader, DatumWriter
 
 
 ### ARGUMENT PARSING
@@ -20,15 +25,18 @@ def dir_valid(x):
 	
 	return x
 
-
+# Feed Argument parser with the description of the 3 arguments we need (input_file,output_file,schema_file)
 arg_parser = ArgumentParser(description="Encoding of raw argo files in avro format")
 arg_parser.add_argument("-i","--input",help="raw text input file", dest="file_in", metavar="FILE", required="TRUE", type=file_valid)
 arg_parser.add_argument("-o","--output",help="output avro file ", dest="file_out", metavar= "FILE", required="TRUE", type=dir_valid)
 arg_parser.add_argument("-s","--schema",help="avro schema file", dest="file_schema", metavar="FILE", required="TRUE", type=file_valid)
+
+# Parse the command line arguments accordingly...
 args = arg_parser.parse_args()
 
 ### READ SCHEMA 
 schema = avro.schema.parse(open(args.file_schema).read())
+
 
 ### READ RAW FILE AND CREATE DIC ACCORDING TO SCHEMA
 
@@ -48,5 +56,26 @@ with open(args.file_in) as f:
 
 		records.append(post)	
 
-print records
 
+### WRITE RECORDS TO AVRO FILE
+
+avro_write =  DataFileWriter(open(args.file_out, "w"), DatumWriter(), schema)
+
+# iterate on all row data and write it to avro file 
+for i,row in enumerate(records):
+	avro_write.append(row);
+
+total_rows = i+1 #number of total rows written
+
+# Print operational stats
+
+#file is saved
+avro_write.close()
+
+### PRINT STATISTICS
+
+print "schema file:", args.file_schema
+print "schema type:", schema.type
+print "schema num of fields:", len(schema.fields)
+for field in schema.fields:
+	print "field:", field.name , "--",field.type.type
