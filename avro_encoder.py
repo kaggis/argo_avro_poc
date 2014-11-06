@@ -76,6 +76,9 @@ avro_write.close()
 
 print "schema file:", args.file_schema
 print "schema type:", schema.type
-print "schema num of fields:", len(schema.fields)
+print "\nschema num of fields:", len(schema.fields)
 for field in schema.fields:
-	print "field:", field.name , "--",field.type.type
+	print "  field:", field.name , "--",field.type.type
+print "\ninput file:" ,args.file_in
+print "output file:" ,args.file_out
+print "total rows written:" ,total_rows
