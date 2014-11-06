@@ -75,6 +75,7 @@ avro_write.close()
 ### PRINT STATISTICS
 
 print "schema file:", args.file_schema
+print "schema name:", schema.name
 print "schema type:", schema.type
 print "\nschema num of fields:", len(schema.fields)
 for field in schema.fields:
