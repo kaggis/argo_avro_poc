@@ -52,7 +52,20 @@ with open(args.file_in) as f:
 
 		post = {} # dictionary : fields + row data
 		for i,val in enumerate(tokens):
-			post[schema.fields[i].name]=val
+			#Convert text according to field type
+			
+			if schema.fields[i].type.type == "int":
+				post[schema.fields[i].name]=int(val)
+			elif schema.fields[i].type.type == "long":
+				post[schema.fields[i].name]=long(val)
+			elif schema.fields[i].type.type == "float":
+				post[schema.fields[i].name]=float(val)
+			elif schema.fields[i].type.type == "double":
+				post[schema.fields[i].name]=float(val)
+			elif schema.fields[i].type.type == "bool":
+				post[schema.fields[i].name]=bool(val)
+			else:
+				post[schema.fields[i].name]=val
 
 		records.append(post)	
 
