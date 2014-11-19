@@ -48,12 +48,16 @@ with open(args.file_in) as f:
 		# Check if number of fields in line == number of fields in schema
 		if len(tokens) != len(schema.fields):
 			print "Mismatch of number of fields between raw file and schema!" 
-			exit(1)
+			print tokens
+			print len(tokens)
+			print len(schema.fields)
+			
 
 		post = {} # dictionary : fields + row data
 		for i,val in enumerate(tokens):
 			#Convert text according to field type
-			
+			if i==len(schema.fields):
+				break
 			if schema.fields[i].type.type == "int":
 				post[schema.fields[i].name]=int(val)
 			elif schema.fields[i].type.type == "long":
