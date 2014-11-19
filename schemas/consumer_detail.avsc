@@ -1,7 +1,7 @@
 {"namespace": "argo.avro",
  "type": "record",
  "name": "Detail_Log",
- "fields": [:
+ "fields": [
   	{"name": "timestamp", "type": "string"},
  	{"name": "ROC", "type": "string"},
  	{"name": "nagios_host", "type": "string"},
