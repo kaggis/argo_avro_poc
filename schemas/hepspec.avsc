@@ -1,0 +1,10 @@
+{"namespace": "argo.avro",
+ "type": "record",
+ "name": "Hepspec",
+ "fields": [
+     {"name": "site", "type": "string"},
+     {"name": "weight",  "type": "int"}
+ ]
+}
+
+
