@@ -1,4 +1,4 @@
-argo_avro_poc
+argo_avro_poc - Proof of Concept
 =============
 
 investigating apache avro usage in argo
