@@ -1,9 +1,0 @@
-{"namespace": "argo.avro",
- "type": "record",
- "name": "weight_groups",
- "fields": [
- 	{"name": "type", "type": "string"},
- 	{"name": "group", "type": "string"},
- 	{"name": "weight", "type": "string"}
- ]
-}

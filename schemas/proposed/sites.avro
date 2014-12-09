@@ -1,9 +1,0 @@
-{"namespace": "argo.avro",
- "type": "record",
- "name": "sites",
- "fields": [
-  	{"name": "site", "type": "string"},
- 	{"name": "service", "type": "string"},
- 	{"name": "hostname", "type": "string"}
- ]
-}
