@@ -1,0 +1,9 @@
+{"namespace": "argo.avro",
+ "type": "record",
+ "name": "group_sites",
+ "fields": [
+  	{"name": "type", "type": "string"},
+ 	{"name": "group", "type": "string"},
+ 	{"name": "site", "type": "string"}
+ ]
+}
