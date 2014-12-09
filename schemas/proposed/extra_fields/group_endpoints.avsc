@@ -1,0 +1,14 @@
+{"namespace": "argo.avro",
+ "type": "record",
+ "name": "group_endpoints",
+ "fields": [
+  	{"name": "type", "type": "string"},
+ 	{"name": "group", "type": "string"},
+ 	{"name": "service", "type": "string"},
+ 	{"name": "hostname", "type": "string"},
+ 	{"name": "production", "type": ["null", "string"]},
+ 	{"name": "monitored", "type": ["null", "string"]},
+ 	{"name": "group_monitored", "type": ["null", "string"]},
+ 	{"name": "group_scope", "type": ["null", "string"]}
+ ]
+}

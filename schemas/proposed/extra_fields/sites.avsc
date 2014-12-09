@@ -1,0 +1,16 @@
+{"namespace": "argo.avro",
+ "type": "record",
+ "name": "sites",
+ "fields": [
+  	{"name": "site", "type": "string"},
+ 	{"name": "service", "type": "string"},
+ 	{"name": "hostname", "type": "string"}
+ 	{"name": "ngi", "type": ["null", "string"]},
+ 	{"name": "production", "type": ["null", "string"]},
+ 	{"name": "monitored", "type": ["null", "string"]},
+ 	{"name": "scope", "type": ["null", "string"]},
+ 	{"name": "infrastructure", "type": ["null", "string"]},
+ 	{"name": "certification", "type": ["null", "string"]},
+ 	{"name": "site_scope", "type": ["null", "string"]}
+ ]
+}
